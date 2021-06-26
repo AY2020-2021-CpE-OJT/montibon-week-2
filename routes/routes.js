@@ -4,12 +4,25 @@ const router = express.Router();
 
 const Post = require('../models/Post');
 
+
+//Week 2 Task 2: GET and POST
+
 //Gets back all the posts
 router.get('/' , async (req,res) => {
     try{
         const posts = await Post.find();
         res.json(posts);
 
+    }catch(err){
+        res.json({message:err});
+    }
+});
+
+//Specific Post
+router.get('/:postId', async (req, res) =>{
+    try{
+        const post = await Post.findById(req.params.postId);
+        res.json(post);
     }catch(err){
         res.json({message:err});
     }
@@ -30,15 +43,7 @@ router.post('/', async (req, res) => {
     }
 });
 
-//Specific Post
-router.get('/:postId', async (req, res) =>{
-    try{
-        const post = await Post.findById(req.params.postId);
-        res.json(post);
-    }catch(err){
-        res.json({message:err});
-    }
-});
+// Other commands as demonstrated on the tutorial
 
 //Delete Post
 router.delete('/:postId', async (req,res)=>{
