@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-const Post = require('../models/Post');
+const Post = require('../collections/Post');
 
 
 //Week 2 Task 2: GET and POST
