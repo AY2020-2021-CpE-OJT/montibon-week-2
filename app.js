@@ -6,9 +6,9 @@ require('dotenv/config');
 
 app.use(bodyParser.json());
 // Import Routes
-const trialRoute = require('./routes/trial');
+const trialRoute = require('./routes/routes');
 
-app.use('/trial', trialRoute);
+app.use('/routes', trialRoute);
 
 //ROUTES
 app.get('/' , (req,res) => {
