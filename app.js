@@ -1,26 +1,38 @@
 const express = require ('express');
 const app = express();
 const mongoose = require('mongoose');
-const bodyParser = require('body-parser');
 require('dotenv/config');
 
-app.use(bodyParser.json());
-// Import Routes
-const trialRoute = require('./routes/routes');
+//This was body-parser before
+app.use(express.json());
 
-app.use('/routes', trialRoute);
+
+// Import Routes
+const menuRoutes = require('./routes/menus');
+const recoRoutes = require('./routes/recommendations');
+const stocksRoutes = require('./routes/stocks');
+const incomeRoutes = require('./routes/income')
+
+
+app.use('/menus', menuRoutes);
+app.use('/recommendations' , recoRoutes);
+app.use('/stocks' , stocksRoutes);
+app.use('/income' , incomeRoutes);
+
 
 //ROUTES
 app.get('/' , (req,res) => {
-    res.send('We are on home');
+    res.send('Routes List: /menus , /recommendations, /stocks , /income');
 });
+
 
 //Connect to DB
 mongoose.connect(
     process.env.DB_CONNECTION,
      { useNewUrlParser: true, useUnifiedTopology: true } , () =>
-    console.log('connected to DB')
+    console.log('DB is online')
 );
+
 
 //How to start listening on the server
 app.listen(3000);
